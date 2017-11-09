@@ -1,0 +1,15 @@
+{
+  "name": "jbboynton/sibling_pages_widget",
+  "version" : "1.0",
+  "description": "Widget to display sibling pages",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "James Boynton",
+      "email": "james.boynton0@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  }
+}
