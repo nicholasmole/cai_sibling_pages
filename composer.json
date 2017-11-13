@@ -1,6 +1,6 @@
 {
-  "name": "jbboynton/sibling_pages_widget",
-  "version" : "1.0",
+  "name": "jbboynton/sibling_pages",
+  "version" : "0.1.0",
   "description": "Widget to display sibling pages",
   "type": "wordpress-plugin",
   "authors": [
