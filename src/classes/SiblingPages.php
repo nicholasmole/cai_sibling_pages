@@ -5,7 +5,7 @@ namespace JB\SPW;
 use JB\SPW\Constants;
 use JB\SPW\Helpers;
 
-class SiblingPagesWidget extends \WP_Widget {
+class SiblingPages extends \WP_Widget {
 
   public function __construct() {
     $args = array(
@@ -43,9 +43,7 @@ class SiblingPagesWidget extends \WP_Widget {
     $show_parent_checked = $instance['show_parent'] ? "checked" : "";
 
     ob_start();
-
     include $template;
-
     $output = ob_get_contents();
     ob_end_clean();
 

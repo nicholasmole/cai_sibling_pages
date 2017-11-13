@@ -11,21 +11,21 @@ require_once plugin_dir_path(__FILE__) . 'src/classes/Activation.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Constants.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Helpers.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/PageList.php';
-require_once plugin_dir_path(__FILE__) . 'src/classes/SiblingPagesWidget.php';
+require_once plugin_dir_path(__FILE__) . 'src/classes/SiblingPages.php';
 
 use JB\SPW;
 use JB\SPW\Activation;
 use JB\SPW\Constants;
 use JB\SPW\Helpers;
 use JB\SPW\PageList;
-use JB\SPW\SiblingPagesWidget;
+use JB\SPW\SiblingPages;
 
 add_action('widgets_init', function() {
   register_widget(Constants::$CLASS);
 });
 
 register_activation_hook(__FILE__, function() {
-	Activation::init();
+  Activation::init();
   flush_rewrite_rules();
 });
 
@@ -34,5 +34,5 @@ register_deactivation_hook(__FILE__, function() {
   flush_rewrite_rules();
 });
 
-new SiblingPagesWidget();
+new SiblingPages();
 

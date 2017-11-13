@@ -23,9 +23,7 @@ class PageList {
     $pages = $this->find_sibling_pages();
 
     ob_start();
-
     include $template;
-
     $output = ob_get_contents();
     ob_end_clean();
 

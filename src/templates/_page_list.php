@@ -1,7 +1,5 @@
 <?php
 
-namespace JB\SPW;
-
 use JB\SPW\Helpers;
 
 ?>
@@ -13,3 +11,4 @@ use JB\SPW\Helpers;
     <?php endforeach; ?>
   </ul>
 </div>
+

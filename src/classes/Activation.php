@@ -12,3 +12,4 @@ class Activation {
     /* Nothing to do... */
   }
 }
+
