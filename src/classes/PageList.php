@@ -11,6 +11,7 @@ class PageList {
 
   public function __construct($list_options) {
     $this->origin = $this->find_origin();
+    //$this->origin = $this->find_origin();
     $this->include_apex = $list_options['apex'];
   }
 
@@ -19,7 +20,11 @@ class PageList {
   }
 
   public function render() {
-    $template = Helpers::get_template_path('_page_list.php');
+     
+      $template = Helpers::get_template_path('_page_list.php');
+    
+    
+
     $pages = $this->find_sibling_pages();
 
     ob_start();
@@ -49,10 +54,23 @@ class PageList {
   }
 
   private function find_child_pages() {
-    $args = array(
-      'parent' => $this->origin,
-      'sort_column' => 'menu_order',
-    );
+    //V: nick-branch
+    /**
+     * Might be missing ID
+     */
+    if (get_post_ancestors( $post )) {
+      $args = array(
+        'child_of' => $this->origin,
+        'depth' => 1,
+        'sort_column' => 'menu_order',
+      );
+    } else {
+      $args = array(
+        'parent' => get_the_ID(),
+        'sort_column' => 'menu_order',
+      );
+    }
+
 
     $pages = get_pages($args);
 

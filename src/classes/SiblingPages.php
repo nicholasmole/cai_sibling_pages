@@ -20,6 +20,7 @@ class SiblingPages extends \WP_Widget {
   public function widget($args, $instance) {
     echo $args['before_widget'];
 
+    //checks show_parent
     $show_parent = $instance['show_parent'] ? true : false;
     $list_options = array(
       'apex' => $show_parent
