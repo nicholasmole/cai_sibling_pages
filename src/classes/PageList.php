@@ -20,11 +20,7 @@ class PageList {
   }
 
   public function render() {
-     
-      $template = Helpers::get_template_path('_page_list.php');
-    
-    
-
+    $template = Helpers::get_template_path('_page_list.php');
     $pages = $this->find_sibling_pages();
 
     ob_start();
