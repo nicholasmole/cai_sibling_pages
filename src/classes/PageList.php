@@ -11,7 +11,6 @@ class PageList {
 
   public function __construct($list_options) {
     $this->origin = $this->find_origin();
-    //$this->origin = $this->find_origin();
     $this->include_apex = $list_options['apex'];
   }
 
@@ -50,10 +49,12 @@ class PageList {
   }
 
   private function find_child_pages() {
-    //V: nick-branch
-    /**
-     * Might be missing ID
-     */
+    
+    global $post;
+
+    $children = get_pages( array( 'child_of' => $post->ID ) );
+    // If true - only try to collect child
+    // Else - this is child. get my parents ID
     if (get_post_ancestors( $post )) {
       $args = array(
         'child_of' => $this->origin,
@@ -66,16 +67,22 @@ class PageList {
         'sort_column' => 'menu_order',
       );
     }
-
+   
+    $keepParent = TRUE;
+    $keepParent = get_post_ancestors( $post->post_parent ) ? FALSE : TRUE;
+    // Check if - child with sublevel child - ignore top-tier parent
+    if ( is_page() && $post->post_parent && count( $children ) > 0 ) {
+      $keepParent = FALSE;
+    }
+    
 
     $pages = get_pages($args);
-
-    if ($this->include_apex) {
+    if ($this->include_apex && $keepParent) {
       array_unshift($pages, get_post($this->origin));
     }
-
     return $pages;
   }
+
 
 }
 

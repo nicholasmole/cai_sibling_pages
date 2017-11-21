@@ -19,6 +19,7 @@ class Helpers {
   }
 
   public function check_if_parent_page($page) {
+    //check if parent || else if active level 
     if((wp_get_post_parent_id( $post_ID ) == $page->ID) || ((get_the_ID() == $page->ID) && (wp_get_post_parent_id( $post_ID ) == 0 ) ) ) {
       return ' mole-sidebar-parent ';
     }else if(get_the_ID() == $page->ID){
