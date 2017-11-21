@@ -18,5 +18,13 @@ class Helpers {
     return "<a href=\"$url\">$name</a>";
   }
 
+  public function check_if_parent_page($page) {
+    if((wp_get_post_parent_id( $post_ID ) == $page->ID) || ((get_the_ID() == $page->ID) && (wp_get_post_parent_id( $post_ID ) == 0 ) ) ) {
+      return ' mole-sidebar-parent ';
+    }else if(get_the_ID() == $page->ID){
+      return ' mole-sidebar-active ' ;
+    }
+  }
+
 }
 
