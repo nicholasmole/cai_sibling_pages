@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Sibling Pages
  * Description: A widget for showing sibling pages.
- * Version: 1.0
- * Author: James Boynton
+ * Version: 1.2x
+ * Author: James Boynton Commandeered by Nick Mole
  * Text Domain: spw-sibling-pages
  */
 
