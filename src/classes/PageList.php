@@ -8,7 +8,6 @@ class PageList {
 
   private $origin;
   private $include_apex = false;
-  //private $currentID;
 
   public function __construct($list_options) {
     $this->origin = $this->find_origin();
