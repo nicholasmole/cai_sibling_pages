@@ -19,11 +19,24 @@ class PageList {
   }
 
   public function render() {
+    global $post;
+
     $template = Helpers::get_template_path('_page_list.php');
+    
+    
+    if($this->get_if_this_is_parent($post,"/client-portal/",1)){
+         $template = Helpers::get_template_path('_page_portal.php');
+    }
+    if($_SERVER['REQUEST_URI'] == '/about-us/'){
+      $template = Helpers::get_template_path('_page_about.php');
+    }
+
     $pages = $this->find_sibling_pages();
 
     ob_start();
     
+    
+
     include $template;
     
     $output = ob_get_contents();
@@ -81,6 +94,28 @@ class PageList {
   private function get_id_of_second_tier_parent($current_post,$offset){
     return get_post_ancestors( $current_post )[$this->get_num_of_parents($current_post,$offset)];
   }
+
+  //Test if Portal Page
+  private function get_if_this_is_parent($current_post,$thisIsParent, $offset){
+    $thisIsParent = array('/client-portal/','/about-us/');
+    $findIfThisIsParent = (get_post_ancestors( $current_post )[Helpers::get_num_of_parents($current_post, $offset)]);
+    $findIfThisIsParent = Helpers::get_relative_permalink($findIfThisIsParent);
+    $findP = $findIfThisIsParent;
+    foreach($thisIsParent as $tP){
+      if($findIfThisIsParent == $tP){
+        $findIfThisIsParent = TRUE;
+      }
+      if($findIfThisIsParent === TRUE){
+        return $findIfThisIsParent;
+      }
+    }
+    if($findIfThisIsParent === TRUE){
+      return $findIfThisIsParent;
+    }
+    $findIfThisIsParent = FALSE;
+
+    return $findIfThisIsParent;
+  }
   
   // Find out where to collect the Arguments
   private function find_args($current_post){
@@ -112,6 +147,18 @@ class PageList {
 
     }
 
+    //Test if Portal Page
+    if($this->get_if_this_is_parent($post,"/client-portal/",1)){
+      //die(var_dump('nooo'));
+      $nowvalue = get_post_ancestors($current_post)[$this->get_num_of_parents($current_post, 1)];
+      $args = array(
+        'child_of' => $nowvalue,
+        'sort_column' => 'menu_order',
+      );
+
+      return $args;
+    }
+    
     if (Helpers::get_num_of_parents($current_post, 0) == 1) {
       $args = array(
         'child_of' => $current_post->ID,
@@ -155,14 +202,24 @@ class PageList {
     $pages = get_pages($this->find_args($post));
     //2 : Append Self Due to Parent being different than Collected children in Tier 2 Pages
     if($this->get_add_self_page($post)){
-      array_unshift($pages, get_post($post->ID));
+
+      if(!($this->get_if_this_is_parent($post,"/client-portal/",1)))
+        array_unshift($pages, get_post($post->ID));
+        
     }
     //3 : Add Parent if Box is Checked && find_keep_parent is true 
     if ($this->include_apex && $this->find_keep_parent($post)) {
-      array_unshift($pages, get_post($this->origin));
+      if(!($this->get_if_this_is_parent($post,"/client-portal/",1)))
+        array_unshift($pages, get_post($this->origin));
+    }
+
+    if($this->get_if_this_is_parent($post,"/client-portal/",1) || $this->get_if_this_is_parent($post,"/client-portal/",0)){
+      if($_SERVER['REQUEST_URI'] != '/about-us/'){
+        array_unshift($pages, get_post(get_post_ancestors($current_post)[$this->get_num_of_parents($current_post, 1)]));
+      }
     }
     
-    return $pages;
+      return $pages;
   }
 
 
