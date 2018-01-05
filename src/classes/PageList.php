@@ -136,9 +136,6 @@ class PageList {
       else:
         $slugGetter = $slugGetter[0]->slug;
       endif;
-      if($slugGetter == 'nav'): $slugGetter = 'precious-metals/refining';endif;
-
-      //$slugGetter = $slugGetter[0]->slug;
       
       //Get URL
       
