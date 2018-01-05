@@ -1,12 +1,12 @@
 {
-  "name": "jbboynton/sibling_pages",
+  "name": "nicholasmole/cai_sibling_pages",
   "version" : "0.1.0",
   "description": "Widget to display sibling pages",
   "type": "wordpress-plugin",
   "authors": [
     {
-      "name": "James Boynton",
-      "email": "james.boynton0@gmail.com"
+      "name": "Nicholas Mole",
+      "email": "nmole065@gmail.com"
     }
   ],
   "require": {

@@ -131,7 +131,14 @@ class PageList {
     if(is_single()){
       //Get the slug for the category
       $slugGetter = get_the_category( $current_post );
-      $slugGetter = $slugGetter[0]->slug;
+      if($slugGetter[0]->slug == 'important'):
+        $slugGetter = $slugGetter[1]->slug;
+      else:
+        $slugGetter = $slugGetter[0]->slug;
+      endif;
+      if($slugGetter == 'nav'): $slugGetter = 'precious-metals/refining';endif;
+
+      //$slugGetter = $slugGetter[0]->slug;
       
       //Get URL
       
